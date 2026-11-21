@@ -1,0 +1,6 @@
+{
+  "name": "Ramona's Home",
+  "description": "Bespoke luxury Plexes, Laneway Houses & Garden Suites, and Movable Houses across Toronto, Vancouver, Montreal, and Calgary.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
