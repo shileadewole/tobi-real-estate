@@ -681,9 +681,19 @@ export function ViewingRequestForm({
           className="bg-[#FAF7F0] border border-[#9A4109] p-5 flex items-start gap-3"
         >
           <AlertCircle className="w-5 h-5 text-[#9A4109] shrink-0 mt-0.5" aria-hidden="true" />
-          <div className="space-y-1">
+          <div className="space-y-2">
             <h4 className="text-sm font-semibold text-[#151513]">{outcome.headline}</h4>
             <p className="text-sm text-[#534F46] leading-relaxed">{outcome.message}</p>
+            {outcome.details.length > 0 && (
+              <dl className="pt-2 border-t border-[#B6AF9D]/50 space-y-1">
+                {outcome.details.map((item) => (
+                  <div key={item.label} className="text-xs text-[#534F46]">
+                    <span className="font-medium text-[#151513]">{item.label}: </span>
+                    <span>{item.value}</span>
+                  </div>
+                ))}
+              </dl>
+            )}
           </div>
         </div>
       )}

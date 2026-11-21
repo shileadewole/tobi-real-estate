@@ -120,14 +120,17 @@ export async function processViewingRequest(
     };
   }
 
-  const rawWebhookUrl = (process.env.N8N_WEBHOOK_URL || '').trim();
-  if (!rawWebhookUrl) {
+  const rawWebhookUrl = (process.env.N8N_WEBHOOK_URL || '')
+    .trim()
+    .replace(/^['"]+|['"]+$/g, '')
+    .trim();
+  if (!rawWebhookUrl || rawWebhookUrl === 'MY_N8N_WEBHOOK_URL') {
     return {
       status: 503,
       body: {
         configured: false,
         error:
-          'The n8n webhook endpoint is not configured yet. Please set N8N_WEBHOOK_URL in your environment variables.',
+          'The n8n webhook endpoint is not configured yet. Set N8N_WEBHOOK_URL to your full https://... n8n webhook URL in Settings → Secrets (or Vercel Environment Variables).',
       },
     };
   }
@@ -138,7 +141,8 @@ export async function processViewingRequest(
       status: 500,
       body: {
         configured: false,
-        error: 'Configured N8N_WEBHOOK_URL is not a valid HTTP/HTTPS URL.',
+        error:
+          'Configured N8N_WEBHOOK_URL is not a valid URL. Make sure it starts with https:// or http://.',
       },
     };
   }
